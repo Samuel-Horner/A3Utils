@@ -1,0 +1,32 @@
+{
+    "schemaVersion": 1,
+    "id": "a3utils",
+    "version": "${version}",
+    "name": "A3 Utils",
+    "description": "Small low-dependency mod that adds some usefull QOL features.",
+    "authors": [
+        "A3therium"
+    ],
+    "contact": {
+        "homepage": "https://fabricmc.net/",
+        "sources": "https://github.com/FabricMC/fabric-example-mod"
+    },
+    "license": "CC0-1.0",
+    "icon": "assets/a3utils/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "com.a3utils.A3Utils"
+        ],
+        "client": [
+            "com.a3utils.A3UtilsClient"
+        ]
+    },
+    "mixins": [],
+    "depends": {
+        "fabricloader": ">=0.16.14",
+        "minecraft": "~1.21.8",
+        "java": ">=21",
+        "fabric-api": "*"
+    }
+}
