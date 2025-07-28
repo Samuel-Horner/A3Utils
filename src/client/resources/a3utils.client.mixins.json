@@ -5,7 +5,8 @@
     "client": [
         "DrawContextMixin",
         "HandledScreenMixin",
-        "InGameHudMixin"
+        "InGameHudMixin",
+        "DimensionEffectsNetherMixin"
     ],
 	"injectors": {
 		"defaultRequire": 1
