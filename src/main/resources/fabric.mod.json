@@ -22,11 +22,16 @@
             "com.a3utils.A3UtilsClient"
         ]
     },
-    "mixins": [],
+    "mixins": [
+        "a3utils.mixins.json",
+        {
+			"config": "a3utils.client.mixins.json",
+			"environment": "client"
+		}
+    ],
     "depends": {
         "fabricloader": ">=0.16.14",
         "minecraft": "~1.21.8",
-        "java": ">=21",
-        "fabric-api": "*"
+        "java": ">=21"
     }
 }
