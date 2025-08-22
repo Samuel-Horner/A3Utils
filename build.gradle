@@ -19,14 +19,14 @@ repositories {
 }
 
 loom {
-    splitEnvironmentSourceSets()
+    // splitEnvironmentSourceSets()
 
-    mods {
-        "a3utils" {
-            sourceSet sourceSets.main
-            sourceSet sourceSets.client
-        }
-    }
+    // mods {
+    //     "a3utils" {
+    //         sourceSet sourceSets.main
+    //         sourceSet sourceSets.client
+    //     }
+    // }
 
 }
 

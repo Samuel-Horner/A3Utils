@@ -1,4 +1,4 @@
-package com.a3utils.mixin.client;
+package com.a3utils.mixin;
 
 import net.minecraft.client.render.DimensionEffects.Nether;
 

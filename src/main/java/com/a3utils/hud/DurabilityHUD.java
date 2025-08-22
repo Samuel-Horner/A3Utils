@@ -20,8 +20,8 @@ public class DurabilityHUD {
         if (stack == null || stack.isEmpty()) return;
         if (!stack.isDamageable()) return;
 
-        RenderUtils.drawQuad(context, x, y, 13, 2, 0xFF000000);
-        RenderUtils.drawQuad(context, x, y - 1, stack.getItemBarStep(), 1, ColorHelper.fullAlpha(stack.getItemBarColor()));
+        RenderUtils.drawQuad(context, x, y - 1, 13, 2, 0xFF000000);
+        RenderUtils.drawQuad(context, x, y, stack.getItemBarStep(), 1, ColorHelper.fullAlpha(stack.getItemBarColor()));
     }
 
     private static void renderArmorBars(DrawContext context, int x, int y) {
@@ -34,7 +34,7 @@ public class DurabilityHUD {
         int scaledHeight = A3UtilsClient.mc.getWindow().getScaledHeight();
 
         int x = (scaledWidth / 2) - 7;
-        int y = scaledHeight - 27;
+        int y = scaledHeight - 28;
         if (A3UtilsClient.mc.player.experienceLevel > 0) { y -= 7; }
 
         renderArmorBars(context, x, y);
