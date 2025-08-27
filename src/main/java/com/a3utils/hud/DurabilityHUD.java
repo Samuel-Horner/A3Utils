@@ -21,7 +21,7 @@ public class DurabilityHUD {
         if (!stack.isDamageable()) return;
 
         RenderUtils.drawQuad(context, x, y - 1, 13, 2, 0xFF000000);
-        RenderUtils.drawQuad(context, x, y, stack.getItemBarStep(), 1, ColorHelper.fullAlpha(stack.getItemBarColor()));
+        RenderUtils.drawQuad(context, x, y - 1, stack.getItemBarStep(), 1, ColorHelper.fullAlpha(stack.getItemBarColor()));
     }
 
     private static void renderArmorBars(DrawContext context, int x, int y) {
