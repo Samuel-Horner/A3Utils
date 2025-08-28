@@ -1,7 +1,6 @@
 package com.a3utils.hud;
 
 import com.a3utils.A3UtilsClient;
-import com.a3utils.render.RenderUtils;
 
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -14,8 +13,11 @@ public class StatusEffectOverlayHUD {
         int minutes = duration / 1200;
 
         if (minutes >= 10) { return "9:99"; }
+
+        int seconds = (duration / 20) % 60;
+        if (seconds <= 9) { return Integer.toString(minutes) + ":0" + Integer.toString((duration / 20) % 60); }
+        else { return Integer.toString(minutes) + ":" + Integer.toString((duration / 20) % 60); }
         
-        return Integer.toString(minutes) + ":" + Integer.toString((duration / 20) % 60);
     }
 
     public static void render(DrawContext context, StatusEffectInstance instance, int left, int top) {
