@@ -6,7 +6,9 @@
         "DrawContextMixin",
         "HandledScreenMixin",
         "InGameHudMixin",
-        "DimensionEffectsNetherMixin"
+        "DimensionEffectsNetherMixin",
+        "GameOptionsMixin",
+        "SimpleOptionMixin"
     ],
     "injectors": {
         "defaultRequire": 1
