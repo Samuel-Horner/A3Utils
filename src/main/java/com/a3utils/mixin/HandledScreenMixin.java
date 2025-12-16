@@ -1,13 +1,11 @@
 package com.a3utils.mixin;
 
 import com.a3utils.event.ContainerTooltip;
-
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.ingame.HandledScreen;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.screen.slot.Slot;
-import net.minecraft.item.ItemStack;
-
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -15,11 +13,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(HandledScreen.class)
+@Mixin(AbstractContainerScreen.class)
 public abstract class HandledScreenMixin {
     @Shadow
     @Nullable
-    protected Slot focusedSlot;
+    protected Slot hoveredSlot;
     /*
      * protected void drawMouseoverTooltip(DrawContext context, int x, int y) {
      * if (this.focusedSlot != null && this.focusedSlot.hasStack()) {
@@ -35,10 +33,10 @@ public abstract class HandledScreenMixin {
      * }
      */
 
-    @Inject(method = "drawMouseoverTooltip", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/client/gui/DrawContext;drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;Ljava/util/Optional;IILnet/minecraft/util/Identifier;)V"))
-    private void onRenderTooltip(DrawContext drawContext, int x, int y, CallbackInfo ci) {
-        ItemStack stack = this.focusedSlot.getStack();
-        if (stack.getComponents().contains(DataComponentTypes.CONTAINER)) {
+    @Inject(method = "renderTooltip", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/client/gui/GuiGraphics;setTooltipForNextFrame(Lnet/minecraft/client/gui/Font;Ljava/util/List;Ljava/util/Optional;IILnet/minecraft/resources/Identifier;)V"))
+    private void onRenderTooltip(GuiGraphics drawContext, int x, int y, CallbackInfo ci) {
+        ItemStack stack = this.hoveredSlot.getItem();
+        if (stack.getComponents().has(DataComponents.CONTAINER)) {
             ContainerTooltip.renderTooltip(drawContext, stack, x, y);
         }
     }

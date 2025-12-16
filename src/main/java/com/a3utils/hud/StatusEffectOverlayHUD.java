@@ -1,13 +1,12 @@
 package com.a3utils.hud;
 
 import com.a3utils.A3UtilsClient;
-
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.world.effect.MobEffectInstance;
 
 public class StatusEffectOverlayHUD {
-    private static String getDuration(StatusEffectInstance instance) {
-        if (instance.isInfinite()) return "";
+    private static String getDuration(MobEffectInstance instance) {
+        if (instance.isInfiniteDuration()) return "";
 
         int duration = instance.getDuration();
         int minutes = duration / 1200;
@@ -20,7 +19,7 @@ public class StatusEffectOverlayHUD {
         
     }
 
-    public static void render(DrawContext context, StatusEffectInstance instance, int left, int top) {
-        context.drawText(A3UtilsClient.mc.textRenderer, getDuration(instance), left + 2, top + 14, 0xFFFFFFFF, true);
+    public static void render(GuiGraphics context, MobEffectInstance instance, int left, int top) {
+        context.drawString(A3UtilsClient.mc.font, getDuration(instance), left + 2, top + 14, 0xFFFFFFFF, true);
     }
 }
