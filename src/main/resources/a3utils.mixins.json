@@ -7,7 +7,8 @@
         "HandledScreenMixin",
         "InGameHudMixin",
         "GameOptionsMixin",
-        "SimpleOptionMixin"
+        "SimpleOptionMixin",
+        "FogRendererMixin"
     ],
     "injectors": {
         "defaultRequire": 1
