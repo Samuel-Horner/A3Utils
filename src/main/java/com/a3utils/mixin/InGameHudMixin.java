@@ -1,6 +1,5 @@
 package com.a3utils.mixin;
 
-import com.a3utils.A3UtilsClient;
 import com.a3utils.hud.DurabilityHUD;
 import com.a3utils.hud.SaturationHUD;
 import com.a3utils.hud.StatusEffectOverlayHUD;
