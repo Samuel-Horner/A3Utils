@@ -30,7 +30,7 @@ public class FogRendererMixin {
     @Inject(method = "setupFog", at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/fog/FogData;renderDistanceEnd:F", ordinal = 0, shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILHARD)
     public void postFogSetup(Camera camera, int renderDistance, DeltaTracker deltaTracker, float f, ClientLevel level, CallbackInfoReturnable<Vector4f> cir, float g, Vector4f vector4f, float h, FogType fogType, Entity entity, FogData fogData) {
         if (fogType == FogType.ATMOSPHERIC) {
-            if (!FOG_ENVIRONMENTS.get(2).isApplicable(fogType, entity)) {
+            if (!FOG_ENVIRONMENTS.get(2).isApplicable(fogType, entity) && !FOG_ENVIRONMENTS.get(3).isApplicable(fogType, entity)) {
                 fogData.environmentalStart = Float.MAX_VALUE;
                 fogData.environmentalEnd = Float.MAX_VALUE;
             }
