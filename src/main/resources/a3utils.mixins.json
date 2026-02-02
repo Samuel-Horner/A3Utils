@@ -7,7 +7,7 @@
         "HandledScreenMixin",
         "InGameHudMixin",
         "GameOptionsMixin",
-        "FogRendererMixin"
+        "AtmosphericFogEnvironmentMixin"
     ],
     "injectors": {
         "defaultRequire": 1

@@ -18,20 +18,6 @@ public abstract class HandledScreenMixin {
     @Shadow
     @Nullable
     protected Slot hoveredSlot;
-    /*
-     * protected void drawMouseoverTooltip(DrawContext context, int x, int y) {
-     * if (this.focusedSlot != null && this.focusedSlot.hasStack()) {
-     * ItemStack itemStack = this.focusedSlot.getStack();
-     * if (this.handler.getCursorStack().isEmpty() ||
-     * this.isItemTooltipSticky(itemStack)) {
-     * context.drawTooltip(this.textRenderer, this.getTooltipFromItem(itemStack),
-     * itemStack.getTooltipData(), x, y,
-     * (Identifier)itemStack.get(DataComponentTypes.TOOLTIP_STYLE));
-     * }
-     * 
-     * }
-     * }
-     */
 
     @Inject(method = "renderTooltip", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/client/gui/GuiGraphics;setTooltipForNextFrame(Lnet/minecraft/client/gui/Font;Ljava/util/List;Ljava/util/Optional;IILnet/minecraft/resources/Identifier;)V"))
     private void onRenderTooltip(GuiGraphics drawContext, int x, int y, CallbackInfo ci) {
