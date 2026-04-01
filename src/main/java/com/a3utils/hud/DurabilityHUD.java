@@ -3,7 +3,7 @@ package com.a3utils.hud;
 import com.a3utils.A3Utils;
 import com.a3utils.A3UtilsClient;
 import com.a3utils.render.RenderUtils;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -17,7 +17,7 @@ public class DurabilityHUD {
     private static final int equipment_slots[] = { EquipmentSlot.FEET.getIndex(36), EquipmentSlot.LEGS.getIndex(36),
             EquipmentSlot.CHEST.getIndex(36), EquipmentSlot.HEAD.getIndex(36) };
 
-    private static void renderBar(GuiGraphics context, ItemStack stack, int x, int y) {
+    private static void renderBar(GuiGraphicsExtractor context, ItemStack stack, int x, int y) {
         if (stack == null || stack.isEmpty())
             return;
         if (!stack.isDamageableItem())
@@ -27,13 +27,13 @@ public class DurabilityHUD {
         RenderUtils.drawQuad(context, x, y - 1, stack.getBarWidth(), 1, ARGB.opaque(stack.getBarColor()));
     }
 
-    private static void renderArmorBars(GuiGraphics context, int x, int y) {
+    private static void renderArmorBars(GuiGraphicsExtractor context, int x, int y) {
         for (int slot : equipment_slots) {
             renderBar(context, A3UtilsClient.mc.player.getInventory().getItem(slot), x, y -= 3);
         }
     }
 
-    private static void renderArmorArea(GuiGraphics context) {
+    private static void renderArmorArea(GuiGraphicsExtractor context) {
         // https://github.com/ReviversMC/microDurability
         int scaledWidth = A3UtilsClient.mc.getWindow().getGuiScaledWidth();
         int scaledHeight = A3UtilsClient.mc.getWindow().getGuiScaledHeight();
@@ -47,7 +47,7 @@ public class DurabilityHUD {
         renderArmorBars(context, x, y);
     }
 
-    public static void render(GuiGraphics context) {
+    public static void render(GuiGraphicsExtractor context) {
         renderArmorArea(context);
     }
 }

@@ -1,7 +1,7 @@
 package com.a3utils.mixin;
 
 import com.a3utils.event.ContainerTooltip;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.inventory.Slot;
@@ -19,8 +19,9 @@ public abstract class HandledScreenMixin {
     @Nullable
     protected Slot hoveredSlot;
 
-    @Inject(method = "renderTooltip", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/client/gui/GuiGraphics;setTooltipForNextFrame(Lnet/minecraft/client/gui/Font;Ljava/util/List;Ljava/util/Optional;IILnet/minecraft/resources/Identifier;)V"))
-    private void onRenderTooltip(GuiGraphics drawContext, int x, int y, CallbackInfo ci) {
+    // @Inject(method = "renderTooltip", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/client/gui/GuiGraphics;setTooltipForNextFrame(Lnet/minecraft/client/gui/Font;Ljava/util/List;Ljava/util/Optional;IILnet/minecraft/resources/Identifier;)V"))
+    @Inject(method = "extractTooltip", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;setTooltipForNextFrame(Lnet/minecraft/client/gui/Font;Ljava/util/List;Ljava/util/Optional;IILnet/minecraft/resources/Identifier;)V"))
+    private void onExtractTooltip(GuiGraphicsExtractor drawContext, int x, int y, CallbackInfo ci) {
         ItemStack stack = this.hoveredSlot.getItem();
         if (stack.getComponents().has(DataComponents.CONTAINER)) {
             ContainerTooltip.renderTooltip(drawContext, stack, x, y);

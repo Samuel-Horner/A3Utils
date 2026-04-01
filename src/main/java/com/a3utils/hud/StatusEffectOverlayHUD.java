@@ -1,7 +1,7 @@
 package com.a3utils.hud;
 
 import com.a3utils.A3UtilsClient;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.world.effect.MobEffectInstance;
 
 public class StatusEffectOverlayHUD {
@@ -33,7 +33,7 @@ public class StatusEffectOverlayHUD {
 
     }
 
-    public static void render(GuiGraphics context, MobEffectInstance instance, int left, int top) {
-        context.drawString(A3UtilsClient.mc.font, getDuration(instance), left + 2, top + 14, getColor(instance), true);
+    public static void render(GuiGraphicsExtractor context, MobEffectInstance instance, int left, int top) {
+        context.text(A3UtilsClient.mc.font, getDuration(instance), left + 2, top + 14, getColor(instance), true);
     }
 }

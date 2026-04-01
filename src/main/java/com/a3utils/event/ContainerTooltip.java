@@ -2,7 +2,7 @@ package com.a3utils.event;
 
 import java.util.Iterator;
 import java.util.stream.Stream;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
@@ -20,7 +20,7 @@ public class ContainerTooltip {
     private static final int shulker_box_texture_width = 256;
     private static final int shulker_box_texture_height = 256;
 
-    private static void renderInventoryBackground(GuiGraphics context, int x, int y, int color) {
+    private static void renderInventoryBackground(GuiGraphicsExtractor context, int x, int y, int color) {
         // https://github.com/sakura-ryoko/malilib/blob/1.21.8/src/main/java/fi/dy/masa/malilib/render/InventoryOverlay.java
         context.blit(RenderPipelines.GUI_TEXTURED, TEXTURE_SHULKER_BOX, x, y, 0, 0, 7, 61, shulker_box_texture_width,
                 shulker_box_texture_height, color);
@@ -39,7 +39,7 @@ public class ContainerTooltip {
         return dye.getTextureDiffuseColor();
     }
 
-    private static void renderItemStacks(GuiGraphics context, ItemStack[] items, int x, int y) {
+    private static void renderItemStacks(GuiGraphicsExtractor context, ItemStack[] items, int x, int y) {
         for (int slot = 0; slot < 27; slot++) {
             final ItemStack item = items[slot];
             if (item == null) {
@@ -48,12 +48,12 @@ public class ContainerTooltip {
 
             final int item_x = x + (slot % 9) * 18 + 8;
             final int item_y = y + (slot / 9) * 18 + 8;
-            context.renderItem(item, item_x, item_y);
-            context.renderItemDecorations(A3UtilsClient.mc.font, item, item_x, item_y);
+            context.item(item, item_x, item_y);
+            context.itemDecorations(A3UtilsClient.mc.font, item, item_x, item_y);
         }
     }
 
-    public static void renderTooltip(GuiGraphics context, ItemStack stack, int mouseX, int mouseY) {
+    public static void renderTooltip(GuiGraphicsExtractor context, ItemStack stack, int mouseX, int mouseY) {
         if (stack.getItem() instanceof BlockItem
                 && ((BlockItem) stack.getItem()).getBlock() instanceof ShulkerBoxBlock) {
             ItemContainerContents container = stack.getComponents().get(DataComponents.CONTAINER);
@@ -62,12 +62,12 @@ public class ContainerTooltip {
                 return;
             }
 
-            int item_count = (int) container.nonEmptyStream().count();
+            int item_count = (int) container.nonEmptyItemCopyStream().count();
             if (item_count == 0) {
                 return;
             }
 
-            Stream<ItemStack> container_stream = container.stream();
+            Stream<ItemStack> container_stream = container.allItemsCopyStream();
             ItemStack[] items = new ItemStack[27];
             Iterator<ItemStack> container_iterator = container_stream.iterator();
 
