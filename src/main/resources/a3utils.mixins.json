@@ -6,7 +6,6 @@
         "DrawContextMixin",
         "HandledScreenMixin",
         "InGameHudMixin",
-        "GameOptionsMixin",
         "AtmosphericFogEnvironmentMixin"
     ],
     "injectors": {
