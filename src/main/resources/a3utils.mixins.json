@@ -5,7 +5,7 @@
     "mixins": [
         "DrawContextMixin",
         "HandledScreenMixin",
-        "InGameHudMixin",
+        "HudMixin",
         "AtmosphericFogEnvironmentMixin"
     ],
     "injectors": {

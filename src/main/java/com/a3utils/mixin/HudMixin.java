@@ -5,7 +5,7 @@ import com.a3utils.hud.SaturationHUD;
 import com.a3utils.hud.StatusEffectOverlayHUD;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.DeltaTracker;
-import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.Hud;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
@@ -14,16 +14,17 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(Gui.class)
-public class InGameHudMixin {
-    @Inject(method = "extractRenderState", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;extractChat(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/client/DeltaTracker;)V"))
+@Mixin(Hud.class)
+public class HudMixin {
+    // @Inject(method = "extractRenderState", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;extractChat(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/client/DeltaTracker;)V"))
+    @Inject(method = "extractChat", at = @At(value = "HEAD"))
     private void preRenderChat(GuiGraphicsExtractor context, DeltaTracker tickCounter, CallbackInfo ci) {
         DurabilityHUD.render(context);
     }
 
     @Inject(method = "extractFood", at = @At(value = "HEAD"))
-    private void postRenderFood(GuiGraphicsExtractor context, Player player, int top, int right, CallbackInfo ci) {
-        SaturationHUD.render(context, top, right, player.getFoodData().getSaturationLevel());
+    private void preRenderFood(final GuiGraphicsExtractor graphics, final Player player, final int yLineBase, final int xRight, CallbackInfo ci) {
+        SaturationHUD.render(graphics, yLineBase, xRight, player.getFoodData().getSaturationLevel());
     }
 
     // com.mojang.blaze3d.pipeline.RenderPipeline;
