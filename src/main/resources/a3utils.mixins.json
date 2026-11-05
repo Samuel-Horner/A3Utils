@@ -6,7 +6,8 @@
         "DrawContextMixin",
         "HandledScreenMixin",
         "HudMixin",
-        "AtmosphericFogEnvironmentMixin"
+        "AtmosphericFogEnvironmentMixin",
+        "TntRendererMixin"
     ],
     "injectors": {
         "defaultRequire": 1
