@@ -67,7 +67,7 @@ public class ContainerTooltip {
                 return;
             }
 
-            Stream<ItemStack> container_stream = container.allItemsCopyStream();
+            Stream<ItemStack> container_stream = container.itemCopies();
             ItemStack[] items = new ItemStack[27];
             Iterator<ItemStack> container_iterator = container_stream.iterator();
 

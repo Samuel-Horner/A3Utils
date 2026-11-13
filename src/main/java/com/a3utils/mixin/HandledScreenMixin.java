@@ -19,8 +19,7 @@ public abstract class HandledScreenMixin {
     @Nullable
     protected Slot hoveredSlot;
 
-    // @Inject(method = "renderTooltip", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/client/gui/GuiGraphics;setTooltipForNextFrame(Lnet/minecraft/client/gui/Font;Ljava/util/List;Ljava/util/Optional;IILnet/minecraft/resources/Identifier;)V"))
-    @Inject(method = "extractTooltip", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;setTooltipForNextFrame(Lnet/minecraft/client/gui/Font;Ljava/util/List;Ljava/util/Optional;IILnet/minecraft/resources/Identifier;)V"))
+    @Inject(method = "extractTooltip", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;setTooltipForNextFrame"))
     private void onExtractTooltip(GuiGraphicsExtractor drawContext, int x, int y, CallbackInfo ci) {
         ItemStack stack = this.hoveredSlot.getItem();
         if (stack.getComponents().has(DataComponents.CONTAINER)) {
